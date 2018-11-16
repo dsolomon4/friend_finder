@@ -1,14 +1,12 @@
 // 3. Your `htmlRoutes.js` file should include two routes:
 
 //    * A GET Route to `/survey` which should display the survey page.
-//    * A default, catch-all route that leads to `home.html` which displays the home page. 
+app.get("/survey", function (req, res) {
+    res.sendFile(path.join(__dirname, "survey.html"))
+})
 
-// =============================================================
-// Dependicies
-var express = require("express");
-var path = require("path");
+// A default, catch-all route that leads to `home.html` which displays the home page. 
 
-// =============================================================
-// Sets up the Express App
-var app = express();
-var PORT = 80;
+app.get("/", function (req, res) {
+    res.sendFile(path.join(__dirname, "home.html"))
+})
