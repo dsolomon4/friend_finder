@@ -17,10 +17,8 @@ app.use(express.json());
 
 // =============================================================
 
+require("./app/routing/htmlRoutes")(app);
 
-app.get("/", function(req,res){
-res.send("hello")
-});
 
 app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
