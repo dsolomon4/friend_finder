@@ -25,6 +25,7 @@ module.exports = function (app) {
         
         app.post("/api/friends", function (req, res) {
             console.log(req.body);
+            
             var user = req.body;
             var userScores = user.scores;
     
