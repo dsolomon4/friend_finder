@@ -21,9 +21,38 @@ module.exports = function (app) {
 
     //A POST routes `/api/friends`. This will be used to handle incoming survey results.
     // This route will also be used to handle the compatibility logic. 
-    app.post("/api/friends", (req, res) => {
-        // console.log("api js: " + newFriends)
+    
+        
+        app.post("/api/friends", function (req, res) {
+            console.log(req.body);
+            var user = req.body;
+            var userScores = user.scores;
+    
+                    var bestMatch = friends[0];
+                    var bestScore = 100;
+                    var compScore = 0;
+    
+                    for (var i in friends) {
+                        for (var j = 0; j <10; j++) {
+                            compScore += Math.abs(parseInt(friends[i].scores[j]) - parseInt(userScores[j]));
+                            console.log("this is the scoring" + compScore);
+                        }
+                        if ((bestScore > compScore) && (user.name != friends[i].name)) {
+                            bestMatch = friends[i];
+                            bestScore = compScore;
+                        }
+                        compScore = 0;
+                    }
+            var findName = true;
+            for (var i = 0; i < friends.length; i++) {
+                if (user.name == friends[i].name) {
+                    findName = false;
+                }
+            }
+            if (findName) {
+                friends.push(req.body);
+            }
+            res.json(bestMatch);
+        });
 
-    });
-
-}
+    }

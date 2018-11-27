@@ -1,8 +1,8 @@
 
 var friends = [
 {
-    "name":"Ahmed",
-    "photo":"https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg",
+    "name":"Betty White",
+    "photo":"https://www.biography.com/.image/t_share/MTE1ODA0OTcxODg1ODIzNTAx/betty-white-9542614-1-402.jpg",
     "scores":[
         5,
         1,

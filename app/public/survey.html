@@ -36,7 +36,7 @@
                     <hr>
                     <div>
                         <h4> Question 1</h4>
-                        <h6> *question holder*</h6>
+                        <h6> * You love to travel *</h6>
                         <select class="custom-select" id="answer-1" style="width:200px">
 
                             <option selected>Select an Option</option>
@@ -50,7 +50,7 @@
                     </div>
                     <div>
                         <h4> Question 2</h4>
-                        <h6> *question holder*</h6>
+                        <h6> * You would rather stay home then go out dancing *</h6>
                         <select class="custom-select" id="answer-2" style="width:200px">
 
                             <option selected>Select an Option</option>
@@ -64,7 +64,7 @@
                     </div>
                     <div>
                         <h4> Question 3</h4>
-                        <h6> *question holder* </h6>
+                        <h6> * You would rahter dine out than cook * </h6>
                         <select class="custom-select "  id="answer-3" style="width:200px">
 
                             <option selected>Select an Option</option>
@@ -78,7 +78,7 @@
                     </div>
                     <div>
                         <h4> Question 4</h4>
-                        <h6> *question holder*</h6>
+                        <h6> * Eating healthy is boring *</h6>
                         <select class="custom-select" id="answer-4"  style="width:200px">
 
                             <option selected>Select an Option</option>
@@ -92,7 +92,7 @@
                     </div>
                     <div>
                         <h4> Question 5</h4>
-                        <h6> *question holder*</h6>
+                        <h6> * Perfect Date: Walk on the beach *</h6>
                         <select class="custom-select" id="answer-5"  style="width:200px">
 
                             <option selected>Select an Option</option>
@@ -106,7 +106,7 @@
                     </div>
                     <div>
                         <h4> Question 6</h4>
-                        <h6> *question holder*</h6>
+                        <h6> * Outdoor activities are amazing *</h6>
                         <select class="custom-select" id="answer-6"  style="width:200px">
 
                             <option selected>Select an Option</option>
@@ -120,7 +120,7 @@
                     </div>
                     <div>
                         <h4> Question 7</h4>
-                        <h6> *question holder*</h6>
+                        <h6> * Going to the movies is an ideal night out *</h6>
                         <select class="custom-select" id="answer-7"  style="width:200px">
 
                             <option selected>Select an Option</option>
@@ -134,7 +134,7 @@
                     </div>
                     <div>
                         <h4> Question 8</h4>
-                        <h6> *question holder*</h6>
+                        <h6> * You would rather go shopping than a walk in the park *</h6>
                         <select class="custom-select" id="answer-8"  style="width:200px">
 
                             <option selected>Select an Option</option>
@@ -148,7 +148,7 @@
                     </div>
                     <div>
                         <h4> Question 9</h4>
-                        <h6> *question holder*</h6>
+                        <h6> * People think you're funny *</h6>
                         <select class="custom-select"  id="answer-9" style="width:200px">
 
                             <option selected>Select an Option</option>
@@ -162,7 +162,7 @@
                     </div>
                     <div>
                         <h4> Question 10</h4>
-                        <h6> *question holder*</h6>
+                        <h6> * You would rather go to a concert than an open mic night *</h6>
                         <select class="custom-select" id="answer-10"  style="width:200px">
 
                             <option selected>Select an Option</option>
@@ -181,16 +181,50 @@
             </div>
         </div>
 
+        <div>
+      
+            <a href="/api/friends"> View Api friends</a>
+      
+          </div>
+
+          <div id="test">
+                
+            <h2 id="matchNameTest">test</h2>
+            <img id="matchImgTest" src="" alt="Match Photo">
+         
 
     </div>
 
+          <div id="resultsModal" class="modal fade" role="dialog" style="display: none;">
+            <div class="modal-dialog">
+      
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal"> <span aria-hidden="true">&times;</span> ×</button>
+                  
+                  <h2 class="modal-title"><strong>Best Match</strong></h2>
+                </div>
+                <div class="modal-body">
+                  <h2 id="matchName">test</h2>
+                  <img id="matchImg" src="" alt="Match Photo">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal" id="close">Close</button>
+                </div>
+              </div>
+      
+            </div>
+    
+          
+    
 
-    <a href="/api/friends"> View Api friends</a>
 
+    </div>
 
+    </div>
 
-
-
+  
 
 
     <!-- Optional JavaScript -->
@@ -218,35 +252,54 @@ $("#submit-button").on("click", function (event) {
 		  return isValid;
 		}
 		// If all required fields are filled
-		if (validateForm() == true)
+		if (createFriends() == true)
 		{
 			console.log("valid");
 			// Create an object for the user's data
         var newFriends = {
         name: $("#nameInput").val().trim(),
-        image: $("#imageInput").val().trim(),
+        photo: $("#imageInput").val().trim(),
         scores: [$("#answer-1").val(),$("#answer-2").val(),$("#answer-3").val(),$("#answer-4").val(),$("#answer-5").val(),$("#answer-6").val(),$("#answer-7").val(),$("#answer-8").val(),$("#answer-9").val(),$("#answer-10").val(),]
     }
 
-    console.log(newFriends)
+    console.log("new friend added" + newFriends.name)
 
     var currentURL = window.location.origin;
 	 
         $.post(currentURL + "/api/friends", newFriends, function (data) {
                      
-                     
-                     
-                     console.log(data)
+            $("#matchNameTest").text(data.name);
+	    	$('#matchImgTest').attr("src", data.photo);
+	    	$('#matchImgTest').attr("height", 200);      
+            
 
+            $("#matchName").text(data.name);
+	    	$('#matchImg').attr("src", data.photo);
+	    	$('#matchImg').attr("height", 200);
+
+		    $("#resultsModal").show();
  
-                 });
-       
-
-    }
+                     console.log("this is your match" + data.name)
+                    });
+		}
+		else
+		{
+			alert("Please fill out all fields before submitting!");
+		}
+    	
     
-createFriends();
+    });
+
+
    
+
+
+$("#close").on("click", function () {
+	$("#resultsModal").hide();
 });
+
+
+
 </script>
 </body>
 
