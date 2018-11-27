@@ -194,41 +194,66 @@
 
         </div>
 
-        <div id="test">
+        <div id="myModal" class="modal">
 
-            <h2 id="matchNameTest">test</h2>
-            <img id="matchImgTest" src="" alt="Match Photo">
-
-
-        </div>
-
-        <div id="resultsModal" class="modal fade" role="dialog" style="display: none;">
-            <div class="modal-dialog">
-
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal"> <span aria-hidden="true">&times;</span>
-                            ×</button>
-
-                        <h2 class="modal-title"><strong>Best Match</strong></h2>
-                    </div>
-                    <div class="modal-body">
-                        <h2 id="matchName">test</h2>
-                        <img id="matchImg" src="" alt="Match Photo">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal" id="close">Close</button>
-                    </div>
-                </div>
-
+            <!-- Modal content -->
+            <div class="modal-content">                   
+                <span class="close">&times;</span>
+                <h2 class="modal-title"><strong>Here is your Best Match!</strong></h2>
+                <hr>
+                <h3 id="matchName"> </h3>
+                <img id="matchImg" src="" alt="Match Photo" >
+                
             </div>
+          
+          </div>
+<style>
 
+.modal-content{
+    text-align: center
+}
 
+img{
+    margin: 50px 225px;
+}
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
 
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
 
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
 
-        </div>
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+</style>
 
     </div>
 
@@ -276,18 +301,41 @@
 
                 var currentURL = window.location.origin;
 
+                // Get the modal
+var modal = document.getElementById('myModal');
+
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal 
+    console.log("woe is me")
+    modal.style.display = "block";
+
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
                 $.post(currentURL + "/api/friends", newFriends, function (data) {
 
-                    $("#matchNameTest").text(data.name);
-                    $('#matchImgTest').attr("src", data.photo);
-                    $('#matchImgTest').attr("height", 200);
+                    // $("#matchNameTest").text(data.name);
+                    // $('#matchImgTest').attr("src", data.photo);
+                    // $('#matchImgTest').attr("height", 200);
 
 
-                    // $("#matchName").text(data.name);
-                    // $('#matchImg').attr("src", data.photo);
-                    // $('#matchImg').attr("height", 200);
-
-                    // $("#resultsModal").show();
+                    $("#matchName").text(data.name);
+                    $('#matchImg').attr("src", data.photo);
+                    $('#matchImg').attr("height", 200);
+                    $('#matchImg').attr("width", 200);
 
                     console.log("this is your match" + data.name)
                 });
